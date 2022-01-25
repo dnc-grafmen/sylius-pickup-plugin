@@ -21,17 +21,17 @@ class PickupListener
     /**
      * @var ServiceRegistryInterface $calculatorRegistry
      */
-    private $calculatorRegistry;
+    private ServiceRegistryInterface $calculatorRegistry;
 
     /**
      * @var ShippingMethodRepositoryInterface $shippingMethodRepository
      */
-    private $shippingMethodRepository;
+    private ShippingMethodRepositoryInterface $shippingMethodRepository;
 
     /**
      * @var ShipmentRepositoryInterface $shipmentRepository
      */
-    private $shipmentRepository;
+    private ShipmentRepositoryInterface $shipmentRepository;
 
     /**
      * @param ServiceRegistryInterface $calculatorRegistry

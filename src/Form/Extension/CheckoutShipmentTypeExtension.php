@@ -27,17 +27,17 @@ final class CheckoutShipmentTypeExtension extends AbstractTypeExtension
     /**
      * @var ServiceRegistryInterface $calculatorRegistry
      */
-    private $calculatorRegistry;
+    private ServiceRegistryInterface $calculatorRegistry;
 
     /**
      * @var ShippingMethodRepositoryInterface $shippingMethodRepository
      */
-    private $shippingMethodRepository;
+    private ShippingMethodRepositoryInterface $shippingMethodRepository;
 
     /**
      * @var ThemeAwareTranslator $translator
      */
-    private $translator;
+    private ThemeAwareTranslator $translator;
 
     /**
      * @param ServiceRegistryInterface $calculatorRegistry

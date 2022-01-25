@@ -19,7 +19,7 @@ class Shipment extends BaseShipment
      *
      * @ORM\Column(name="pickup_id", type="string", nullable=true, length=255)
      */
-    private $pickup_id;
+    private ?string $pickup_id;
 
     /**
      * @return string|null
@@ -30,7 +30,7 @@ class Shipment extends BaseShipment
     }
 
     /**
-     * @param string $pickupId
+     * @param string|null $pickupId
      */
     public function setPickupId(?string $pickupId): void
     {
