@@ -21,7 +21,7 @@ final class CustomerOrderAddressesSaver implements OrderAddressesSaverInterface
     /**
      * @var CustomerAddressAdderInterface
      */
-    private $addressAdder;
+    private CustomerAddressAdderInterface $addressAdder;
 
     /**
      * @param CustomerAddressAdderInterface $addressAdder

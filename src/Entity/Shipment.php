@@ -12,10 +12,6 @@ namespace Magentix\SyliusPickupPlugin\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Core\Model\Shipment as BaseShipment;
 
-/**
- * @ORM\Entity
- * @ORM\MappedSuperclass()
- */
 class Shipment extends BaseShipment
 {
     /**
