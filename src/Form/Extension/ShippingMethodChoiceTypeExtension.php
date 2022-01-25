@@ -22,7 +22,7 @@ final class ShippingMethodChoiceTypeExtension extends AbstractTypeExtension
     /**
      * @var ServiceRegistryInterface $calculatorRegistry
      */
-    private $calculatorRegistry;
+    private ServiceRegistryInterface $calculatorRegistry;
 
     /**
      * @param ServiceRegistryInterface $calculatorRegistry

@@ -26,16 +26,15 @@ use Symfony\Component\Intl\Countries;
 
 final class PickupController extends AbstractController
 {
-
     /**
      * @var ServiceRegistryInterface $calculatorRegistry
      */
-    private $calculatorRegistry;
+    private ServiceRegistryInterface $calculatorRegistry;
 
     /**
      * @var RepositoryInterface
      */
-    private $countryRepository;
+    private RepositoryInterface $countryRepository;
 
     /**
      * @param ServiceRegistryInterface $calculatorRegistry
@@ -44,8 +43,7 @@ final class PickupController extends AbstractController
     public function __construct(
         ServiceRegistryInterface $calculatorRegistry,
         RepositoryInterface $countryRepository
-    )
-    {
+    ) {
         $this->calculatorRegistry = $calculatorRegistry;
         $this->countryRepository = $countryRepository;
     }

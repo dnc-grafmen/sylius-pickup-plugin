@@ -22,7 +22,7 @@ final class OrderPreCompleteListener extends PickupListener
     /**
      * @var AddressFactory $addressFactory
      */
-    private $addressFactory;
+    private AddressFactory $addressFactory;
 
     /**
      * @param ServiceRegistryInterface $calculatorRegistry
