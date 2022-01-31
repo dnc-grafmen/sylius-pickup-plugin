@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Magentix\SyliusPickupPlugin\Controller;
 
+use Magentix\SyliusPickupPlugin\Component\Core\Pickup\PickupHandlerResultInterface;
 use Magentix\SyliusPickupPlugin\Shipping\Calculator\CalculatorInterface as PickupCalculatorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ShippingMethod;
@@ -17,35 +18,22 @@ use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Intl\Countries;
 
 final class PickupController extends AbstractController
 {
-    /**
-     * @var ServiceRegistryInterface $calculatorRegistry
-     */
     private ServiceRegistryInterface $calculatorRegistry;
+    private PickupHandlerResultInterface $pickupHandlerResult;
 
-    /**
-     * @var RepositoryInterface
-     */
-    private RepositoryInterface $countryRepository;
-
-    /**
-     * @param ServiceRegistryInterface $calculatorRegistry
-     * @param RepositoryInterface $countryRepository
-     */
     public function __construct(
         ServiceRegistryInterface $calculatorRegistry,
-        RepositoryInterface $countryRepository
+        PickupHandlerResultInterface $pickupHandlerResult
     ) {
         $this->calculatorRegistry = $calculatorRegistry;
-        $this->countryRepository = $countryRepository;
+        $this->pickupHandlerResult = $pickupHandlerResult;
     }
 
     /**
@@ -92,16 +80,13 @@ final class PickupController extends AbstractController
             }
         }
 
-        $pickup = [
-            'pickup' => [
-                'current_id' => $pickupCurrentId,
-                'list' => $pickupList,
-            ],
-            'address' => $currentAddress,
-            'countries' => $this->getAvailableCountries(),
-            'index' => $request->get('index', 0),
-            'code' => $method,
-        ];
+        $pickup = $this->pickupHandlerResult->handle(
+            $pickupCurrentId,
+            $pickupList,
+            $currentAddress,
+            (int)($request->get('index', 0)),
+            $method
+        );
 
         return $this->render($pickupTemplate, ['method' => $pickup]);
     }
@@ -197,24 +182,5 @@ final class PickupController extends AbstractController
         $orderRepository = $this->get('sylius.repository.order');
 
         return $orderRepository;
-    }
-
-    /**
-     * @return array|CountryInterface[]
-     */
-    private function getAvailableCountries(): array
-    {
-        $countries = Countries::getNames();
-
-        /** @var CountryInterface[] $definedCountries */
-        $definedCountries = $this->countryRepository->findAll();
-
-        $availableCountries = [];
-
-        foreach ($definedCountries as $country) {
-            $availableCountries[$country->getCode()] = $countries[$country->getCode()];
-        }
-
-        return $availableCountries;
     }
 }

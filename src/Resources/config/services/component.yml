@@ -4,3 +4,7 @@ services:
         public: true
         arguments:
             - "@sylius.customer_unique_address_adder"
+    Magentix\SyliusPickupPlugin\Shipping\Service\Pickup\PickupHandlerResult:
+        arguments:
+            - "@sylius.repository.country"
+    magentix_sylius_pickup_plugin.handler_result: "@Magentix\SyliusPickupPlugin\Shipping\Service\Pickup\PickupHandlerResult"
