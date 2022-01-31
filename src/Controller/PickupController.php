@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Magentix\SyliusPickupPlugin\Controller;
 
-use Magentix\SyliusPickupPlugin\Component\Core\Pickup\PickupHandlerResultInterface;
+use Magentix\SyliusPickupPlugin\Shipping\Service\Pickup\PickupHandlerResultInterface;
 use Magentix\SyliusPickupPlugin\Shipping\Calculator\CalculatorInterface as PickupCalculatorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ShippingMethod;
