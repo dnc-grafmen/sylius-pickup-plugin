@@ -3,6 +3,6 @@ services:
         public: true
         arguments:
             - "@sylius.registry.shipping_calculator"
-            - "@sylius.repository.country"
+            - "@magentix_sylius_pickup_plugin.handler_result"
         calls:
             -   setContainer: [ '@service_container' ]

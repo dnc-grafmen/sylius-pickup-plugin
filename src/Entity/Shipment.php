@@ -15,11 +15,11 @@ use Sylius\Component\Core\Model\Shipment as BaseShipment;
 class Shipment extends BaseShipment
 {
     /**
-     * @var string $pickup_id|null
+     * @var string|null $pickup_id
      *
      * @ORM\Column(name="pickup_id", type="string", nullable=true, length=255)
      */
-    private ?string $pickup_id;
+    protected ?string $pickup_id;
 
     /**
      * @return string|null
